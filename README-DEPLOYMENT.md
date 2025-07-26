@@ -27,7 +27,7 @@ STRIPE_SECRET_KEY=sk_live_your_actual_key
 STRIPE_WEBHOOK_SECRET=whsec_your_actual_secret
 
 # AI Configuration
-ANTHROPIC_API_KEY=sk-ant-your_actual_key
+ANTHROPIC_API_KEY=sk-ant-your_actual_ke
 
 # Email Configuration  
 SMTP_USERNAME=your_smtp_username
