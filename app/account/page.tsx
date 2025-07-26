@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -49,7 +49,7 @@ const sidebarItems = [
   { id: "contact", label: "Contact Us", icon: Mail },
 ]
 
-export default function AccountPage() {
+function AccountPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const { user } = useAuth()
@@ -1875,5 +1875,13 @@ export default function AccountPage() {
         <div className="p-8">{renderContent()}</div>
       </div>
     </div>
+  )
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <AccountPageContent />
+    </Suspense>
   )
 } 
