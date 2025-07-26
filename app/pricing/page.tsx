@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -82,7 +82,7 @@ const pricingTiers: PricingTier[] = [
   },
 ]
 
-export default function PricingPage() {
+function PricingPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { isAuthenticated, user, refreshUserData } = useAuth()
@@ -579,5 +579,20 @@ export default function PricingPage() {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function PricingPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+          <p className="text-muted-foreground">Please wait while we prepare the pricing information.</p>
+        </div>
+      </div>
+    }>
+      <PricingPageContent />
+    </Suspense>
   )
 } 
