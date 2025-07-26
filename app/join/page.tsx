@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { AppSidebar } from "@/components/app-sidebar"
 import { Button } from "@/components/ui/button"
@@ -15,7 +15,7 @@ import { roomHasPassword, getRoomDocuments, storeRoomState, storeRoomDocuments }
 import { useAuth } from "@/contexts/AuthContext"
 import { authService } from "@/lib/auth-service"
 
-export default function JoinRoomPage() {
+function JoinRoomPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { isAuthenticated, user } = useAuth()
@@ -498,5 +498,22 @@ export default function JoinRoomPage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function JoinRoomPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen">
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+            <p className="text-muted-foreground">Please wait while we prepare the room joining page.</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <JoinRoomPageContent />
+    </Suspense>
   )
 }

@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
 import { toast } from 'sonner'
 
-export default function AuthSuccessPage() {
+function AuthSuccessPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { login } = useAuth()
@@ -40,5 +40,20 @@ export default function AuthSuccessPage() {
         <p className="text-muted-foreground">Please wait while we complete your authentication.</p>
       </div>
     </div>
+  )
+}
+
+export default function AuthSuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+          <p className="text-muted-foreground">Please wait while we prepare your authentication.</p>
+        </div>
+      </div>
+    }>
+      <AuthSuccessPageContent />
+    </Suspense>
   )
 } 

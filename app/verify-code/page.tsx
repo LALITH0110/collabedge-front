@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,7 +10,7 @@ import { Loader2, Mail, ArrowLeft, RefreshCw } from "lucide-react"
 import { AnimatedBackground } from "@/components/animated-background"
 import { toast } from "sonner"
 
-export default function VerifyCodePage() {
+function VerifyCodePageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [verificationCode, setVerificationCode] = useState("")
@@ -265,5 +265,20 @@ export default function VerifyCodePage() {
         </Card>
       </div>
     </div>
+  )
+}
+
+export default function VerifyCodePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Loading...</h1>
+          <p className="text-muted-foreground">Please wait while we prepare your verification page.</p>
+        </div>
+      </div>
+    }>
+      <VerifyCodePageContent />
+    </Suspense>
   )
 } 
