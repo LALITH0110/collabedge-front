@@ -52,7 +52,7 @@ const sidebarItems = [
 function AccountPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
   const [activeSection, setActiveSection] = useState("overview")
   const [dataSharing, setDataSharing] = useState(true)
   const [openAI, setOpenAI] = useState(true)
@@ -615,8 +615,9 @@ function AccountPageContent() {
 
       if (response.ok) {
         toast.success('Account deleted successfully')
-        // Clear local storage and redirect to home
-        localStorage.clear()
+        // Use AuthContext logout to properly clear auth state
+        logout()
+        // Redirect to home
         router.push('/')
       } else {
         const error = await response.json()
@@ -856,20 +857,20 @@ function AccountPageContent() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span>Documents</span>
-                      <span className="font-bold">2.4 GB</span>
+                      <span className="font-bold">0.1 GB</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '60%' }}></div>
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '3%' }}></div>
                     </div>
-                    <p className="text-sm text-muted-foreground">60% of 4 GB used</p>
+                    <p className="text-sm text-muted-foreground">1% of 4 GB used</p>
                     <Separator />
                     <div className="flex items-center justify-between">
                       <span>Images</span>
-                      <span className="font-bold">1.2 GB</span>
+                      <span className="font-bold">0 GB</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span>Other Files</span>
-                      <span className="font-bold">0.8 GB</span>
+                      <span className="font-bold">0.1 GB</span>
                     </div>
                   </div>
                 </CardContent>
@@ -1714,20 +1715,20 @@ function AccountPageContent() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span>Documents</span>
-                      <span className="font-bold">2.4 GB</span>
+                      <span className="font-bold">0.1 GB</span>
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '60%' }}></div>
+                      <div className="bg-blue-500 h-2 rounded-full" style={{ width: '3%' }}></div>
                     </div>
-                    <p className="text-sm text-muted-foreground">60% of 4 GB used</p>
+                    <p className="text-sm text-muted-foreground">1% of 4 GB used</p>
                     <Separator />
                     <div className="flex items-center justify-between">
                       <span>Images</span>
-                      <span className="font-bold">1.2 GB</span>
+                      <span className="font-bold">0 GB</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span>Other Files</span>
-                      <span className="font-bold">0.8 GB</span>
+                      <span className="font-bold">0.1 GB</span>
                     </div>
                   </div>
                 </CardContent>
@@ -1774,7 +1775,7 @@ function AccountPageContent() {
                     <Mail className="h-5 w-5" />
                     <div>
                       <p className="font-medium">Email Support</p>
-                      <p className="text-sm text-muted-foreground">support@collabedge.com</p>
+                      <p className="text-sm text-muted-foreground">no-reply@lalithkothuru.com</p>
                     </div>
                   </div>
                   <Separator />
@@ -1782,7 +1783,7 @@ function AccountPageContent() {
                     <FileText className="h-5 w-5" />
                     <div>
                       <p className="font-medium">Documentation</p>
-                      <p className="text-sm text-muted-foreground">docs.collabedge.com</p>
+                      <p className="text-sm text-muted-foreground">Coming Soon</p>
                     </div>
                   </div>
                   <Separator />
@@ -1790,7 +1791,7 @@ function AccountPageContent() {
                     <Users className="h-5 w-5" />
                     <div>
                       <p className="font-medium">Community</p>
-                      <p className="text-sm text-muted-foreground">community.collabedge.com</p>
+                      <p className="text-sm text-muted-foreground">Coming Soon</p>
                     </div>
                   </div>
                 </div>
