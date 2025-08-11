@@ -16,6 +16,7 @@ export default function EditorPage({ params }: EditorPageProps) {
   const [roomId, setRoomId] = useState<string>('');
   const [editorType, setEditorType] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+  const [showSidebar, setShowSidebar] = useState(false);
   
   // Resolve params first
   useEffect(() => {
@@ -91,8 +92,6 @@ export default function EditorPage({ params }: EditorPageProps) {
     );
   }
   
-  const [showSidebar, setShowSidebar] = useState(false);
-
   return (
     <div className="flex h-screen">
       <AppSidebar defaultOpen={showSidebar} />
