@@ -32,6 +32,7 @@ import {
   Clock,
   ChevronRight,
   Sparkles,
+  Menu,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -211,9 +212,13 @@ const safelySetToLocalStorage = (key: string, value: string): void => {
 export function EditorContainer({
   roomId,
   editorType,
+  showSidebar,
+  setShowSidebar,
 }: {
   roomId: string
   editorType: string
+  showSidebar?: boolean
+  setShowSidebar?: (show: boolean) => void
 }) {
   const router = useRouter()
   const [documents, setDocuments] = useState<Document[]>([])
@@ -1721,9 +1726,17 @@ export function EditorContainer({
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-50">
         <div className="flex items-center justify-between p-4">
-          <div className="flex items-center gap-2 ml-12">
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setShowSidebar?.(true)}
+              className="w-8 h-8 p-0"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
             <div className="flex flex-col">
               <h1 className="text-xl font-semibold">{roomName || "Untitled Room"}</h1>
               <p className="text-sm text-muted-foreground">Room Key: {roomKey}</p>
