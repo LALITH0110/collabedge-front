@@ -510,15 +510,22 @@ export function LandingPage() {
 
   return (
     <>
-      <div className="min-h-screen flex flex-col">
+      <div className="h-screen w-screen flex flex-col relative bg-transparent">
         <AppSidebar defaultOpen={showSidebar} />
         <AnimatedBackground />
 
       {/* Header */}
-      <header className="relative z-10 border-b border-white/10 backdrop-blur-sm bg-black/20">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
-            <div className="w-6 md:w-0"></div>
+      <header className="relative z-50 border-b border-white/10 backdrop-blur-sm bg-black/20">
+        <div className="w-full px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => setShowSidebar(true)}
+              className="w-8 h-8 p-0"
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
             <span 
               className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => router.push('/')}
@@ -553,9 +560,9 @@ export function LandingPage() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex">
+      <main className="flex-1 flex w-full">
         {/* Hero Content */}
-        <div className="relative z-20 container mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-16">
+        <div className="relative z-20 w-full flex flex-col md:flex-row items-center justify-between px-6 py-16">
           <div className="max-w-2xl mb-12 md:mb-0">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">Real-time collaborative workspace</h1>
             <div className="w-full">
@@ -601,8 +608,8 @@ export function LandingPage() {
             </div>
           </div>
 
-          <div className="w-full max-w-md relative overflow-hidden hidden md:block">
-            <div style={{ height: '690px', position: 'relative' }}>
+          <div className="w-full max-w-md relative overflow-visible hidden md:block" style={{ marginRight: '100px', marginTop: '-100px' }}>
+            <div style={{ height: '700px', position: 'relative', transform: 'scale(1.2)', zIndex: 1 }}>
               <CardSwap
                 cardDistance={55}
                 verticalDistance={75}

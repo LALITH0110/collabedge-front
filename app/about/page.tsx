@@ -117,18 +117,17 @@ export default function AboutPage() {
       <AnimatedBackground />
 
       {/* Header */}
-      <header className="relative z-10 border-b border-white/10 backdrop-blur-sm bg-black/20">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-8">
+      <header className="relative z-50 border-b border-white/10 backdrop-blur-sm bg-black/20">
+        <div className="w-full px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-1">
             <Button 
               variant="ghost" 
-              size="sm"
+              size="icon"
               onClick={() => setShowSidebar(true)}
-              className="md:hidden w-8 h-8 p-0"
+              className="w-8 h-8 p-0"
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-5 w-5" />
             </Button>
-            <div className="w-6 md:w-0"></div>
             <span 
               className="text-2xl font-bold cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => router.push('/')}
@@ -138,8 +137,8 @@ export default function AboutPage() {
           </div>
           <div className="flex items-center gap-6">
             <div className="hidden md:flex items-center gap-4 absolute left-1/2 transform -translate-x-1/2">
-              <Button variant="ghost" size="sm" onClick={() => router.push('/')}>
-                Home
+              <Button variant="ghost" size="sm" onClick={() => router.push('/about')}>
+                About
               </Button>
               <Button variant="ghost" size="sm" onClick={() => router.push('/features')}>
                 Features

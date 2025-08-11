@@ -613,16 +613,17 @@ export function AppSidebar({ defaultOpen = false }: AppSidebarProps) {
       {/* Overlay for mobile */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden" 
+          className="fixed inset-0 z-[9998] bg-black/50 lg:hidden" 
           onClick={closeSidebar}
         />
       )}
 
       {/* Sidebar */}
       <div 
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-r transform transition-transform duration-200 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-[9999] w-64 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-r transform transition-transform duration-200 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
+        style={{ fontSize: '90%' }}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -852,7 +853,7 @@ export function AppSidebar({ defaultOpen = false }: AppSidebarProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="fixed top-4 left-4 z-40"
+          className="fixed top-4 left-4 z-51"
           onClick={toggleSidebar}
         >
           <Menu className="h-5 w-5" />

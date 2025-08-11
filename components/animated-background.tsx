@@ -6,21 +6,41 @@ export function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    console.log("AnimatedBackground useEffect running")
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas) {
+      console.log("Canvas not found!")
+      return
+    }
+    console.log("Canvas found:", canvas)
 
     const ctx = canvas.getContext("2d")
-    if (!ctx) return
+    if (!ctx) {
+      console.log("Context not found!")
+      return
+    }
+    console.log("Context found:", ctx)
 
-    // Set canvas dimensions to fill the entire document height
+    // Set canvas dimensions to fill the entire viewport with extra boundaries
     const resizeCanvas = () => {
       if (!canvas) return
-      canvas.width = window.innerWidth
-      canvas.height = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, window.innerHeight)
+      // Make canvas much larger than viewport to ensure coverage
+      canvas.width = window.innerWidth * 1.5
+      canvas.height = window.innerHeight * 1.5
     }
 
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
+    
+    // Test: Draw something immediately to verify canvas works
+    console.log("Drawing test elements...")
+    ctx.fillStyle = "red"
+    ctx.fillRect(50, 50, 100, 100)
+    ctx.fillStyle = "blue"
+    ctx.beginPath()
+    ctx.arc(200, 200, 50, 0, Math.PI * 2)
+    ctx.fill()
+    console.log("Test elements drawn")
     
     // Also resize when the document content changes (for dynamic content)
     const resizeObserver = new ResizeObserver(() => {
@@ -44,8 +64,8 @@ export function AnimatedBackground() {
 
       constructor() {
         // Safe to use canvas here since we already checked for null above
-        this.x = Math.random() * (canvas?.width || window.innerWidth)
-        this.y = Math.random() * (canvas?.height || window.innerHeight)
+        this.x = Math.random() * (canvas?.width || window.innerWidth * 1.5)
+        this.y = Math.random() * (canvas?.height || window.innerHeight * 1.5)
         this.size = Math.random() * 3 + 1
         this.speedX = Math.random() * 1 - 0.5
         this.speedY = Math.random() * 1 - 0.5
@@ -66,8 +86,8 @@ export function AnimatedBackground() {
 
       draw() {
         if (!ctx) return
-        // Reduce opacity for more subtle particles
-        ctx.globalAlpha = 0.6
+        // Make particles more visible
+        ctx.globalAlpha = 0.9
         ctx.fillStyle = this.color
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
@@ -82,12 +102,14 @@ export function AnimatedBackground() {
       }
     }
 
+    let animationFrame = 0
     function animate() {
       if (!ctx || !canvas) return
+      animationFrame++
+      if (animationFrame % 60 === 0) {
+        console.log("Animation running, frame:", animationFrame)
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      // Use a very dark background fill that's almost black
-      ctx.fillStyle = "rgba(5, 5, 10, 0.2)"
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update()
@@ -123,5 +145,6 @@ export function AnimatedBackground() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="absolute -z-10 bg-black" style={{ height: '100%', minHeight: '100%', top: '0', right: '0', left: '-20px', width: 'calc(100% + 20px)' }} />
+  return <canvas ref={canvasRef} className="fixed z-10 pointer-events-none bg-black" style={{ top: '0', left: '0', width: '100%', height: '100%'}} />
+  //return <canvas ref={canvasRef} className="absolute -z-10 bg-black" style={{ height: '100%', minHeight: '100%', top: '0', right: '0', left: '-20px', width: 'calc(100% + 20px)' }} />
 }

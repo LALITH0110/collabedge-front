@@ -33,12 +33,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark h-full w-full" suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/png" href="/ce.png" />
         <link rel="shortcut icon" href="/ce.png" />
       </head>
-      <body className={`${inter.className} antialiased dark`} suppressHydrationWarning>
+      <body className={`${inter.className} antialiased dark h-full w-full`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           <AuthProvider>
             {children}
