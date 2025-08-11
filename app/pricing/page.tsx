@@ -216,7 +216,7 @@ function PricingPageContent() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <AppSidebar defaultOpen={showSidebar} />
+      <AppSidebar defaultOpen={showSidebar} onOpenChange={setShowSidebar} />
       <AnimatedBackground />
 
       {/* Header */}

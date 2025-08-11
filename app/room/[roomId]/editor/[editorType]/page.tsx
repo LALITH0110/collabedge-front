@@ -94,7 +94,7 @@ export default function EditorPage({ params }: EditorPageProps) {
   
   return (
     <div className="flex h-screen">
-      <AppSidebar defaultOpen={showSidebar} />
+      <AppSidebar defaultOpen={showSidebar} onOpenChange={setShowSidebar} />
       <div className="flex-1">
         <EditorContainer roomId={roomId} editorType={editorType} showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
       </div>

@@ -511,7 +511,7 @@ export function LandingPage() {
   return (
     <>
       <div className="h-screen w-screen flex flex-col relative bg-transparent">
-        <AppSidebar defaultOpen={showSidebar} />
+        <AppSidebar defaultOpen={showSidebar} onOpenChange={setShowSidebar} />
         <AnimatedBackground />
 
       {/* Header */}

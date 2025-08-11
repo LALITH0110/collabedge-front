@@ -57,9 +57,10 @@ import { authService, type Room } from "@/lib/auth-service"
 
 type AppSidebarProps = {
   defaultOpen?: boolean
+  onOpenChange?: (open: boolean) => void
 }
 
-export function AppSidebar({ defaultOpen = false }: AppSidebarProps) {
+export function AppSidebar({ defaultOpen = false, onOpenChange }: AppSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(defaultOpen)
@@ -361,6 +362,7 @@ export function AppSidebar({ defaultOpen = false }: AppSidebarProps) {
 
   const closeSidebar = () => {
     setIsOpen(false)
+    onOpenChange?.(false)
   }
 
   const openLoginDialog = () => {
