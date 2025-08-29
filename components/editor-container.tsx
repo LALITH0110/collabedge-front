@@ -271,12 +271,24 @@ export function EditorContainer({
     if (isConnected && sendMessage) {
       console.log(`🔗 WebSocket connected, sending JOIN message for room ${roomId}`);
       
-      const joinMessage = {
-        type: "JOIN",
-        username: "User",
-        roomId: roomId,
-        timestamp: Date.now()
-      };
+              // Generate a valid username that won't be rejected by backend
+        const storedUsername = localStorage.getItem('username');
+        const randomGuest = `Guest${Math.floor(Math.random() * 10000)}`;
+        const username = storedUsername && 
+                        storedUsername !== "User" && 
+                        storedUsername !== "Anonymous" && 
+                        !storedUsername.toLowerCase().includes("user") && 
+                        !storedUsername.toLowerCase().includes("anonymous") && 
+                        storedUsername.trim() !== ""
+          ? storedUsername 
+          : randomGuest;
+        
+        const joinMessage = {
+          type: "JOIN",
+          username: username,
+          roomId: roomId,
+          timestamp: Date.now()
+        };
       
       try {
         sendMessage(JSON.stringify(joinMessage));
