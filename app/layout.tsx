@@ -15,15 +15,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/favicon.svg',
-        type: 'image/svg+xml',
+        url: '/fav.png',
+        type: 'image/png',
       },
       {
-        url: '/favicon.ico',
+        url: '/fav.png',
         sizes: 'any',
       }
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/fav.png',
   },
 }
 
@@ -35,8 +35,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark h-full w-full" suppressHydrationWarning>
       <head>
-        <link rel="icon" type="image/png" href="/ce.png" />
-        <link rel="shortcut icon" href="/ce.png" />
+        <link rel="icon" type="image/png" href="/fav.png" />
+        <link rel="shortcut icon" href="/fav.png" />
       </head>
       <body className={`${inter.className} antialiased dark h-full w-full`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
