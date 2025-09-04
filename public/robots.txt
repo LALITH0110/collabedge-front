@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# SEO-friendly pages
+Allow: /about
+Allow: /features
+Allow: /pricing
+
+# Authentication and user pages - no crawling needed
+Disallow: /api/
+Disallow: /auth-success
+Disallow: /verify-code
+Disallow: /verify-email
+Disallow: /join
+Disallow: /create
+Disallow: /room/
+Disallow: /account
+
+# Static assets
+Allow: /llms.txt
+Allow: /favicon.ico
+Allow: /fav.png
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Important crawlable content
+Allow: /llms.txt
+
+
+# Sitemap location
+Sitemap: https://collabedge.pro/sitemap.xml
