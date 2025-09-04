@@ -76,11 +76,15 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     return
   }
 
+  // Convert display format to internal format for consistency
+  const displayPlanName = session.metadata?.planName || 'pro'
+  const internalPlanName = convertDisplayToInternalFormat(displayPlanName)
+
   // Update user subscription in backend
   await updateUserSubscription(userId, {
     stripeCustomerId: session.customer as string,
     subscriptionId: session.subscription as string,
-    planName: session.metadata?.planName || 'pro',
+    planName: internalPlanName,
     status: 'active',
   })
 }
@@ -143,6 +147,22 @@ function getPlanNameFromPriceId(priceId?: string): string {
   }
   
   return priceMapping[priceId || ''] || 'pro'
+}
+
+function convertDisplayToInternalFormat(displayName: string): string {
+  // Convert display format to internal format for database consistency
+  switch (displayName.toLowerCase()) {
+    case 'pro + ai':
+    case 'pro+ai':
+      return 'pro_ai'
+    case 'pro':
+      return 'pro'
+    case 'free':
+      return 'free'
+    default:
+      console.warn(`Unknown plan name: ${displayName}, defaulting to 'free'`)
+      return 'free'
+  }
 }
 
 async function updateUserSubscription(userId: string, data: {
